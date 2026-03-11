@@ -14,24 +14,23 @@ Since you already have the files in the `FireReach_Github` folder:
 You will need to create 5 separate "Web Services" on Render, one for each microservice.
 
 ### Base Directory Configuration
-To let each service access the `shared/` folder, DO NOT set the "Root Directory" to a subfolder on Render. Instead:
+To fix the `MODULE_NOT_FOUND` error, I've added a **root `package.json`** to the folder. Now Render can install all dependencies at once at the top level.
+
 1.  Set the **Root Directory** to `.` (the top level of your repo).
-2.  Change your **Start Command** to run the specific service (e.g., `node api-gateway/index.js`).
-3.  Set the **Build Command** to `npm install` for the specific folder (e.g., `cd api-gateway && npm install`).
+2.  Set the **Build Command** to: `npm install` (for ALL services).
+3.  Set the **Start Command** to run the specific service (see table below).
 
 ### Services Configuration
 Set these environment variables for **each** service (from your `.env`):
-*   `GROQ_API_KEY`
-*   `SERPER_API_KEY`
-*   `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `EMAIL_FROM`
+*   `GROQ_API_KEY`, `SERPER_API_KEY`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `EMAIL_FROM`
 
-| Service | Build Command | Start Command | Env Var to Add |
-| :--- | :--- | :--- | :--- |
-| **API Gateway** | `cd api-gateway && npm install` | `node api-gateway/index.js` | `AGENT_SERVICE_URL` (URL of Agent Service) |
-| **Agent Service** | `cd agent-service && npm install` | `node agent-service/index.js` | `SIGNAL_SERVICE_URL`, `RESEARCH_SERVICE_URL`, `OUTREACH_SERVICE_URL` |
-| **Signal Harvester** | `cd signal-harvester-service && npm install` | `node signal-harvester-service/index.js` | - |
-| **Research Analyst** | `cd research-analyst-service && npm install` | `node research-analyst-service/index.js` | - |
-| **Outreach Sender** | `cd outreach-sender-service && npm install` | `node outreach-sender-service/index.js` | - |
+| Service | Build Command | Start Command |
+| :--- | :--- | :--- |
+| **API Gateway** | `npm install` | `node api-gateway/index.js` |
+| **Agent Service** | `npm install` | `node agent-service/index.js` |
+| **Signal Harvester** | `npm install` | `node signal-harvester-service/index.js` |
+| **Research Analyst** | `npm install` | `node research-analyst-service/index.js` |
+| **Outreach Sender** | `npm install` | `node outreach-sender-service/index.js` |
 
 > **Important:** Once the microservices are deployed, update the `SERVICE_URL` environment variables in the **API Gateway** and **Agent Service** to point to the new Render URLs (e.g., `https://firereach-agent.onrender.com`).
 
