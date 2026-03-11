@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import './App.css';
 
-const API_URL = 'http://localhost:3000';
+const API_URL = import.meta.env.VITE_API_URL || 'https://fire-gateway.onrender.com';
 
 const PIPELINE_STEPS = [
   { id: 'signals', label: '🔍 Searching company signals...', completedLabel: 'Signals captured' },

@@ -123,6 +123,8 @@ async function runAgent({ company, email, icp, requestId }) {
         if (toolIndex === expectedIndex) {
           currentStep++;
         }
+        
+        // Store results for later and update trace
         if (toolName === 'tool_signal_harvester') {
           results.signals = result.signals || [];
           trace.push({
@@ -139,7 +141,7 @@ async function runAgent({ company, email, icp, requestId }) {
           });
         } else if (toolName === 'tool_outreach_sender') {
           results.email = {
-            subject: result.subject,
+            subject: result.subject || result.emailSubject,
             content: result.emailContent,
             sentStatus: result.sentStatus,
             messageId: result.messageId,
@@ -151,7 +153,6 @@ async function runAgent({ company, email, icp, requestId }) {
           });
         }
 
-        currentStep++;
         log.info(`✅ ${toolName} completed successfully`);
 
         // Important: tell the AI the result of the tool
