@@ -1,4 +1,5 @@
 const Groq = require('groq-sdk');
+const axios = require('axios');
 const { TOOL_SCHEMAS, executeTool } = require('./tools');
 const { createLogger } = require('./utils');
 
@@ -49,6 +50,18 @@ async function runAgent({ company, email, icp, requestId }) {
 
   trace.push({ step: 'agent_started', message: 'FireReach Agent initialized', timestamp: new Date().toISOString() });
 
+  // ── Warm up all downstream services (Render free tier sleeps) ──
+  const SIGNAL_URL = process.env.SIGNAL_SERVICE_URL || 'http://localhost:3002';
+  const RESEARCH_URL = process.env.RESEARCH_SERVICE_URL || 'http://localhost:3003';
+  const OUTREACH_URL = process.env.OUTREACH_SERVICE_URL || 'http://localhost:3004';
+  log.info('🌡️  Warming up downstream services...');
+  await Promise.allSettled([
+    axios.get(`${SIGNAL_URL}/health`, { timeout: 30000 }),
+    axios.get(`${RESEARCH_URL}/health`, { timeout: 30000 }),
+    axios.get(`${OUTREACH_URL}/health`, { timeout: 30000 }),
+  ]);
+  log.info('✅ Services warmed up');
+
   const messages = [
     { role: 'system', content: SYSTEM_PROMPT },
     {
@@ -63,7 +76,7 @@ async function runAgent({ company, email, icp, requestId }) {
     log.info(`\n── Agent iteration ${i + 1} ──`);
 
     const completion = await groq.chat.completions.create({
-      model: 'llama-3.1-8b-instant',
+      model: 'llama-3.3-70b-versatile',
       messages,
       tools: TOOL_SCHEMAS,
       tool_choice: 'auto',

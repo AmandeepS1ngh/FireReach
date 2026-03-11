@@ -97,8 +97,8 @@ async function executeTool(toolName, args, requestId) {
         return await axios.post(`${SIGNAL_SERVICE_URL}/signals`, {
           company: args.company,
           requestId,
-        }, { timeout: 30000 });
-      }, 2, 1000);
+        }, { timeout: 60000 }); // 60s timeout for cold starts
+      }, 4, 3000); // 4 retries, 3s apart
       return response.data;
     }
 
