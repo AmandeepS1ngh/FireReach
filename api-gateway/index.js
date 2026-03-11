@@ -4,7 +4,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const axios = require('axios');
 const rateLimit = require('express-rate-limit');
-const { generateRequestId, isValidEmail, createLogger } = require('../shared/utils');
+const { generateRequestId, isValidEmail, createLogger } = require('./utils');
 
 const app = express();
 const PORT = process.env.API_GATEWAY_PORT || 3000;

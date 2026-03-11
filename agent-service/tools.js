@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { withRetry, createLogger } = require('../shared/utils');
+const { withRetry, createLogger } = require('./utils');
 
 const SIGNAL_SERVICE_URL = process.env.SIGNAL_SERVICE_URL || 'http://localhost:3002';
 const RESEARCH_SERVICE_URL = process.env.RESEARCH_SERVICE_URL || 'http://localhost:3003';

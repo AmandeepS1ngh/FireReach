@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
 const NodeCache = require('node-cache');
-const { createLogger, withRetry } = require('../shared/utils');
+const { createLogger, withRetry } = require('./utils');
 
 const app = express();
 const PORT = process.env.SIGNAL_SERVICE_PORT || 3002;

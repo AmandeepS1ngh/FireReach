@@ -2,7 +2,7 @@ require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') }
 const express = require('express');
 const cors = require('cors');
 const { runAgent } = require('./agent');
-const { createLogger } = require('../shared/utils');
+const { createLogger } = require('./utils');
 
 const app = express();
 const PORT = process.env.AGENT_SERVICE_PORT || 3001;

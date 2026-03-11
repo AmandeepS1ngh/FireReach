@@ -1,6 +1,6 @@
 const Groq = require('groq-sdk');
 const { TOOL_SCHEMAS, executeTool } = require('./tools');
-const { createLogger } = require('../shared/utils');
+const { createLogger } = require('./utils');
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 

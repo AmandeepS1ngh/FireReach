@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const Groq = require('groq-sdk');
 const nodemailer = require('nodemailer');
-const { createLogger, withRetry } = require('../shared/utils');
+const { createLogger, withRetry } = require('./utils');
 
 const app = express();
 const PORT = process.env.OUTREACH_SERVICE_PORT || 3004;
