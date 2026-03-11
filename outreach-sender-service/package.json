@@ -1,0 +1,18 @@
+{
+  "name": "firereach-outreach-sender",
+  "version": "1.0.0",
+  "description": "FireReach Outreach Sender – LLM email generation + SMTP delivery",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.0",
+    "express": "^4.21.0",
+    "groq-sdk": "^0.5.0",
+    "nodemailer": "^6.9.0",
+    "uuid": "^11.1.0"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "firereach-agent-service",
+  "version": "1.0.0",
+  "description": "FireReach Agent Service – LLM orchestrator with function calling",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.0",
+    "express": "^4.21.0",
+    "groq-sdk": "^0.5.0",
+    "uuid": "^11.1.0"
+  }
+}
